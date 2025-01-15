@@ -10,6 +10,7 @@ class Mailing(models.Model):
     ]
 
     delay = models.IntegerField(verbose_name="задержка отправки", choices=Delay)
+    # sending_time = models.DateTimeField(verbose_name="Время отправки сообщения", null=True, blank=True)
 
     class Meta:
         verbose_name = "Почтовое сообщение"
@@ -20,7 +21,7 @@ class Mailing(models.Model):
 
 
 class Telegram(models.Model):
-    user_id = models.CharField(verbose_name="id", max_length=11)
+    recepient = models.CharField(verbose_name="id", max_length=11)
     mailing_id = models.ForeignKey(Mailing, verbose_name='рассылка', on_delete=models.CASCADE)
 
     class Meta:
@@ -28,11 +29,11 @@ class Telegram(models.Model):
         verbose_name_plural = "Телеграм-пользователи"
 
     def __str__(self):
-        return f"Телеграм-пользователь: {self.user_id}"
+        return f"Телеграм-пользователь: {self.recepient}"
 
 
 class Mail(models.Model):
-    mail = models.CharField(verbose_name="почта", max_length=150)
+    recepient = models.CharField(verbose_name="почта", max_length=150)
     mailing_id = models.ForeignKey(Mailing, verbose_name='рассылка', on_delete=models.CASCADE)
 
     class Meta:
@@ -40,7 +41,7 @@ class Mail(models.Model):
         verbose_name_plural = "Почты пользователей"
 
     def __str__(self):
-        return f"Почта пользователя: {self.mail}"
+        return f"Почта пользователя: {self.recepient}"
 
 # class Logs(models.Model):
 

@@ -9,8 +9,8 @@ class MailingAdmin(admin.ModelAdmin):
 
 @admin.register(Telegram)
 class TelegramAdmin(admin.ModelAdmin):
-   list_filter = ("id", "user_id")
+   list_filter = ("id", "recepient")
 
 @admin.register(Mail)
 class MailAdmin(admin.ModelAdmin):
-   list_filter = ("id", "mail")
+   list_filter = ("id", "recepient")
