@@ -26,6 +26,7 @@ INSTALLED_APPS = [
 
     "rest_framework",
     "mailing",
+    "drf_yasg",
 
 
 ]
