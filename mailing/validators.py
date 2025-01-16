@@ -34,7 +34,7 @@ def checking_for_correctness(recepients):
     Проверяет корректность получателей
     """
     for recepient in recepients:
-        print(recepient)
+        # print(recepient)
         if not "@" in recepient:
             if not recepient.isdigit():
                 raise ValidationError(f"Получатель {recepient} не является почтой или id в telegram")
