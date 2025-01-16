@@ -1,7 +1,10 @@
+import ast
+
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
 from mailing.models import Mail, Mailing
+from mailing.validators import list_recepient, checking_for_correctness
 
 
 class MailSerializer(serializers.ModelSerializer):
@@ -25,8 +28,10 @@ class MailingSerializer(serializers.ModelSerializer):
         - проверяет что каждый элемент списка является словарем с ключом 'mail'
         - проверяет что значение каждого ключа 'mail' является валидным email
         """
-        if not value:
-            raise ValidationError("Список получателей не может быть пустым.")
+
+        recepient = list_recepient(value[0]["recepient"])
+        # print(recepient)
+        checking_for_correctness(recepient)
 
 
 
@@ -34,6 +39,7 @@ class MailingSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         mails_data = validated_data.pop('recepient')
+        # print(mails_data)
         mailing = Mailing.objects.create(**validated_data)
         for mail_data in mails_data:
             Mail.objects.create(mailing_id=mailing, **mail_data)
