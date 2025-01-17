@@ -1,7 +1,7 @@
 from django.db import models
 
 class Mailing(models.Model):
-    message = models.TextField(verbose_name="название", max_length=1024)
+    message = models.TextField(verbose_name="сообщение", max_length=1024)
 
     Delay = [
         (0, 0),    # - отправлять без задержки, при получении запроса
@@ -10,7 +10,7 @@ class Mailing(models.Model):
     ]
 
     delay = models.IntegerField(verbose_name="задержка отправки", choices=Delay)
-    # sending_time = models.DateTimeField(verbose_name="Время отправки сообщения", null=True, blank=True)
+    sending_time = models.DateTimeField(verbose_name="время отправки сообщения", null=True, blank=True)
 
     class Meta:
         verbose_name = "Почтовое сообщение"
@@ -43,10 +43,17 @@ class Mail(models.Model):
     def __str__(self):
         return f"Почта пользователя: {self.recepient}"
 
-# class Logs(models.Model):
+class Logs(models.Model):
+    message = models.TextField(verbose_name="сообщение", max_length=1024, null=True, blank=True)
+    sending_time = models.DateTimeField(verbose_name="время отправки сообщения", null=True, blank=True)
+    recepient = models.TextField(verbose_name="получатель", max_length=1024, null=True, blank=True)
+    server_response = models.TextField(verbose_name="ответ сервера", max_length=1024, null=True, blank=True)
 
+    class Meta:
+        verbose_name = "Лог отправки"
+        verbose_name_plural = "Логи отправки"
 
-
-
+    def __str__(self):
+        return f"Лог отправки: {self.message[:20]}..."
 
 

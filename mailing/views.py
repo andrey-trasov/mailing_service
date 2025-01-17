@@ -1,14 +1,15 @@
-from rest_framework import viewsets
+from django.utils import timezone
 from rest_framework.generics import CreateAPIView
 
 from mailing.models import Mailing
 from mailing.serializers import MailingSerializer
+from myproject.settings import TIME_ZONE
 
-
-# class MailingViewSet(viewsets.ModelViewSet):
-#     queryset = Mailing.objects.all()
-#     serializer_class = MailingSerializer
 
 class MailingCreateApiView(CreateAPIView):
-   queryset = Mailing.objects.all()
-   serializer_class = MailingSerializer
+    queryset = Mailing.objects.all()
+    serializer_class = MailingSerializer
+
+    def perform_create(self, serializer):
+       serializer.save(sending_time=timezone.now())
+
