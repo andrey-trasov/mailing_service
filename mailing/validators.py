@@ -34,19 +34,9 @@ def checking_for_correctness(recepients):
     Проверяет корректность получателей
     """
     for recepient in recepients:
-        # print(recepient)
         if not "@" in recepient:
             if not recepient.isdigit():
                 raise ValidationError(f"Получатель {recepient} не является почтой или id в telegram")
 
 
 
-# {
-#   "message": "string",
-#   "delay": 0,
-#   "recepient": [
-#     {
-#       "recepient": "['string@gmail.com', 'string@gmail.com', 'string@gmail.com', '123456789']"
-#     }
-#   ]
-# }

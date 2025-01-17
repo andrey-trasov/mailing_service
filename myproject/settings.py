@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -27,6 +28,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "mailing",
     "drf_yasg",
+    "django_celery_beat",
 
 
 ]
@@ -107,3 +109,36 @@ STATIC_URL = "static/"
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+
+
+CELERY_BEAT_SCHEDULE = {
+   'checking_date_last_entry': {    #название функции из task
+       'task': 'mailing.tasks.sending_messages',  # Путь к задаче
+       'schedule': timedelta(seconds=5),  # Расписание выполнения задачи
+   },
+}
+
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+#настройки почты
+
+EMAIL_HOST = 'smtp.mail.ru'
+EMAIL_PORT = 2525
+EMAIL_HOST_USER = "py.ma.1@mail.ru"
+EMAIL_HOST_PASSWORD = "kc0uSNRYAXFdwEwqNapj"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
+
+SERVER_EMAIL = EMAIL_HOST_USER
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+#настройки бота
+
+TELEGRAM_TOKEN = "7645708977:AAGqacI202PI11RsKbIeQcqXnbHKKNVbqEc"
+
+
