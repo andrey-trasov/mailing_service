@@ -2,6 +2,7 @@ import ast
 
 from rest_framework.exceptions import ValidationError
 
+
 def validity_error():
     raise ValidationError(
         f"Не правильный тип данных"
@@ -15,7 +16,9 @@ def list_recepient(recepient):
     Возвращает список с получателями
     """
     # print(recepient)
-    if recepient[0] == "[" and recepient[-1] == "]":  # проверка, передан список или 1 значение
+    if (
+        recepient[0] == "[" and recepient[-1] == "]"
+    ):  # проверка, передан список или 1 значение
         try:
             return ast.literal_eval(recepient)
         except:
@@ -29,6 +32,7 @@ def list_recepient(recepient):
     else:
         validity_error()
 
+
 def checking_for_correctness(recepients):
     """
     Проверяет корректность получателей
@@ -36,7 +40,6 @@ def checking_for_correctness(recepients):
     for recepient in recepients:
         if not "@" in recepient:
             if not recepient.isdigit():
-                raise ValidationError(f"Получатель {recepient} не является почтой или id в telegram")
-
-
-
+                raise ValidationError(
+                    f"Получатель {recepient} не является почтой или id в telegram"
+                )

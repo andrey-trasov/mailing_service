@@ -8,7 +8,7 @@ from mailing.validators import list_recepient, checking_for_correctness
 class MailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Mail
-        fields = ('recepient',)
+        fields = ("recepient",)
 
 
 class MailingSerializer(serializers.ModelSerializer):
@@ -16,8 +16,7 @@ class MailingSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Mailing
-        fields = ('id', 'message', 'delay', 'recepient')
-
+        fields = ("id", "message", "delay", "recepient")
 
     def validate_recepient(self, value):
         """
@@ -31,7 +30,7 @@ class MailingSerializer(serializers.ModelSerializer):
         return value
 
     def create(self, validated_data):
-        mails_data = validated_data.pop('recepient')
+        mails_data = validated_data.pop("recepient")
         mailing = Mailing.objects.create(**validated_data)
         recepients = list_recepient(mails_data[0]["recepient"])
         creating_recipients(recepients, mailing)

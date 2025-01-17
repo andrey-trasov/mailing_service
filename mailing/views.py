@@ -5,6 +5,7 @@ from rest_framework.generics import CreateAPIView
 from mailing.models import Mailing
 from mailing.serializers import MailingSerializer
 
+
 class MailingCreateApiView(CreateAPIView):
     queryset = Mailing.objects.all()
     serializer_class = MailingSerializer
@@ -19,4 +20,3 @@ class MailingCreateApiView(CreateAPIView):
             time = timezone.now() + timezone.timedelta(days=1)
         mailing.sending_time = time
         mailing.save()
-
