@@ -1,4 +1,4 @@
-from stripe._http_client import requests
+import requests
 
 from django.core.mail import send_mail
 from pytz import timezone

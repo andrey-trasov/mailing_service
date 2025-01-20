@@ -17,6 +17,7 @@ django-celery-beat = "^2.7.0"
 redis = "^5.2.1"
 python-telegram-bot = "^21.10"
 black = "^24.10.0"
+stripe = "^11.4.1"
 
 
 [build-system]
