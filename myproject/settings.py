@@ -61,15 +61,16 @@ WSGI_APPLICATION = "myproject.wsgi.application"
 
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": os.getenv("NAME"),
-        "USER": os.getenv("USER"),
-        "PASSWORD": os.getenv("PASSWORD"),
-        "HOST": os.getenv("HOST"),
-        "PORT": os.getenv("PORT"),
-    }
+   "default": {
+       "ENGINE": "django.db.backends.postgresql_psycopg2",
+       'NAME': os.getenv('POSTGRES_DB'),
+       'USER':  os.getenv('POSTGRES_USER'),
+       'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+       'HOST': os.getenv('POSTGRES_HOST'),
+       'PORT': os.getenv('POSTGRES_PORT')
+   }
 }
+
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -114,8 +115,8 @@ CELERY_BEAT_SCHEDULE = {
     },
 }
 
-CELERY_BROKER_URL = "redis://localhost:6379/0"
-CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
 
 # настройки почты
 

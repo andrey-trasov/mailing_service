@@ -15,7 +15,6 @@ def list_recepient(recepient):
     """
     Возвращает список с получателями
     """
-    # print(recepient)
     if (
         recepient[0] == "[" and recepient[-1] == "]"
     ):  # проверка, передан список или 1 значение
