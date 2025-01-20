@@ -15,8 +15,8 @@
 Пример запроса для создания рассылки c 1 получателем:
 
 {
-  "message": "string",
-  "delay": 0,
+  "message": "string", 
+  "delay": 0, 
   "recepient": [
     {
       "recepient": "1164941539"
@@ -27,8 +27,8 @@
 Пример запроса для создания рассылки с несколькоми получателями:
 
 {
-  "message": "string",
-  "delay": 0,
+  "message": "string", 
+  "delay": 0, 
   "recepient": [
     {
       "recepient": "['py.te.3@mail.ru', '1164941539']"
